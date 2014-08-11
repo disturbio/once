@@ -323,9 +323,9 @@ cmd_new_token() {
 	check_sneaky_paths "$path"
 	if [[ -f $oncefile ]]; then
 		if [[ $clip -eq 0 ]]; then
-			exec $OATH ${OATH_OPTS[@]} `$GPG -d "${GPG_OPTS[@]}" "$oncefile"`
+			exec $OATH ${OATH_OPTS[@]} "`$GPG -d "${GPG_OPTS[@]}" "$oncefile"`"
 		else
-			local token="$($OATH ${OATH_OPTS[@]} `$GPG -d "${GPG_OPTS[@]}" "$oncefile"`)"
+			local token="$( $OATH ${OATH_OPTS[@]} " `$GPG -d "${GPG_OPTS[@]}" "$oncefile"` " )"
 			[[ -n $token ]] || exit 1
 			clip "$token" "$path"
 		fi
